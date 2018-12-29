@@ -1,7 +1,7 @@
-import React, { Component } from "react"
-import { StyleSheet, View } from "react-native"
+import React, { Component } from 'react'
+import { StyleSheet, View } from 'react-native'
 
-import { CreateDeckButton, EnterDeck } from "./DeckCreationFields"
+import { CreateDeckButton, EnterDeck } from './DeckCreationFields'
 
 class DeckCreation extends Component {
   constructor(props) {

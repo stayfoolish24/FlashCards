@@ -1,11 +1,11 @@
-import React, { Component } from "react"
-import { StyleSheet, View } from "react-native"
+import React, { Component } from 'react'
+import { StyleSheet, View } from 'react-native'
 
-import Input from "./Input"
-import NormalText from "./Normaltext"
+import Input from './Input'
+import NormalText from './NormalText'
 
 class LabeledInput extends Component {
-  redner() {
+  render() {
     return (
       <View style={styles.wrapper}>
         <NormalText style={styles.label}>{this.props.label}</NormalText>

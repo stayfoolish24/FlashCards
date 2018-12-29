@@ -1,13 +1,13 @@
-import React, { Component } from "react"
-import { StyleSheet, Text, View } from "react-native"
+import React, { Component } from 'react'
+import { StyleSheet, Text, View } from 'react-native'
 
-import { fonts, scalingFactors } from "./../styles/fonts"
-import Dimensions from "Dimensions"
+import { fonts, scalingFactors } from './../styles/fonts'
+import Dimensions from 'Dimensions'
 
-let { width } = Dimensions.get("window")
+let { width } = Dimensions.get('window')
 
 class HeadingText extends Component {
-  static displayName = "HeadingText"
+  static displayName = 'HeadingText'
 
   render() {
     return (

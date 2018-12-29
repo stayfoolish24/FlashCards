@@ -1,17 +1,21 @@
-import Recat, { Component } from "react"
-import { StyleSheet, View } from "react-native"
+import React, { Component } from 'react'
+import { StyleSheet, View } from 'react-native'
 
-import DeckModel from "./../../data/Deck"
+import DeckModel from './../../data/Deck'
 
-import Button from "../Button"
-import labeledInput from "../LabeledInput"
-import NormalText from "../NormalText"
-import colors from "./../../styles/colors"
+import Button from '../Button'
+import LabeledInput from '../LabeledInput'
+import NormalText from '../NormalText'
+import colors from './../../styles/colors'
 
 class NewCard extends Component {
+  static navigationOptions = { title: 'Create Card' }
+
+  static initialState = { front: '', back: '' }
+
   constructor(props) {
     super(props)
-    this.state = { font: "", back: "" }
+    this.state = this.initialState
   }
 
   _handleFront = text => {
@@ -23,15 +27,16 @@ class NewCard extends Component {
   }
 
   _createCard = () => {
-    console.warn("Not implemented")
+    console.warn('Data saving not implemented')
+    this.props.navigation.navigate('CardCreation')
   }
 
   _reviewDeck = () => {
-    console.warn("Not implemented")
+    this.props.navigation.navigate('Review')
   }
 
   _doneCreating = () => {
-    console.warn("Not implemented")
+    this.props.navigation.navigate('Home')
   }
 
   render() {
@@ -49,8 +54,9 @@ class NewCard extends Component {
           onEntry={this._handleBack}
           onChange={this._handleBack}
         />
+
         <Button style={styles.createButton} onPress={this._createCard}>
-          <Normarltext>Create Card</Normarltext>
+          <NormalText>Create Card</NormalText>
         </Button>
 
         <View style={styles.buttonRow}>
@@ -69,8 +75,8 @@ class NewCard extends Component {
 
 const styles = StyleSheet.create({
   createButton: { backgroundColor: colors.green },
-  secondaryButton: { backgroundcolor: colors.blue },
-  buttonRow: { flexDirection: "row" }
+  secondaryButton: { backgroundColor: colors.blue },
+  buttonRow: { flexDirection: 'row' }
 })
 
 export default NewCard

@@ -1,24 +1,24 @@
-import React, { Component } from "react"
-import { StyleSheet, TextInput, View } from "react-native"
+import React, { Component } from 'react'
+import { StyleSheet, TextInput, View } from 'react-native'
 
-import colors from "./../styles/colors"
-import { fonts } from "./../styles/fonts"
+import colors from './../styles/colors'
+import { fonts } from './../styles/fonts'
 
 class Input extends Component {
   constructor(props) {
     super(props)
-    this.state = { text: "" }
+    this.state = { text: '' }
   }
 
   _create = () => {
     this.props.onEntry(this.state.text)
-    this.setState({ text: "" })
+    this.setState({ text: '' })
   }
 
   _onSubmit = ev => {
     this.props.onEntry(ev.nativeEvent.text)
     if (!!this.props.clearOnSubmit) {
-      this.setState({ text: "" })
+      this.setState({ text: '' })
     }
   }
 
@@ -33,7 +33,7 @@ class Input extends Component {
     return (
       <TextInput
         style={[
-          styels.nameField,
+          styles.nameField,
           styles.wideButton,
           fonts.normal,
           this.props.style
@@ -48,12 +48,14 @@ class Input extends Component {
   }
 }
 
+Input.defaultProps = { clearOnSubmit: true }
+
 const styles = StyleSheet.create({
   nameField: {
     backgroundColor: colors.tan,
     height: 60
   },
-  wideButton: { justifyContent: "center", padding: 10, margin: 10 }
+  wideButton: { justifyContent: 'center', padding: 10, margin: 10 }
 })
 
 export default Input

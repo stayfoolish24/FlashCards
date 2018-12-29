@@ -1,20 +1,22 @@
-import React from "react"
-import { StyleSheet, View } from "react-native"
+import React, { Component } from 'react'
+import { StyleSheet, View } from 'react-native'
 
-import ViewCard from "./ViewCard"
-import { MockReviews } from "./../../data/Mocks"
-import { mkReviewSummary } from "./ReviewSummary"
-import colors from "./../../styles/colors"
+import ViewCard from './ViewCard'
+import { MockReviews } from './../../data/Mocks'
+import { mkReviewSummary } from './ReviewSummary'
+import colors from './../../styles/colors'
 
 class ReviewScreen extends Component {
-  static displayName = "ReviewScreen"
+  static displayName = 'ReviewScreen'
+
+  static navigationOptions = { title: 'ReView' }
 
   constructor(props) {
     super(props)
     this.state = {
       numReviewed: 0,
       numCorrect: 0,
-      cureentReview: 0,
+      currentReview: 0,
       reviews: MockReviews
     }
   }
@@ -27,11 +29,13 @@ class ReviewScreen extends Component {
   }
 
   _nextReview = () => {
+    console.warn('Showing next review, but data saving not implemented.')
     this.setState({ currentReview: this.state.currentReview + 1 })
   }
 
   _quitReviewing = () => {
-    console.warn("Not implemented")
+    console.warn('Data saving not implemented')
+    this.props.navigation.goBack()
   }
 
   _contents() {

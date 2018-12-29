@@ -1,13 +1,13 @@
-import React, { Component } from "react"
-import { StyleSheet, View } from "react-navigation"
+import React, { Component } from 'react'
+import { StyleSheet, View } from 'react-native'
 
-import DeckModel from "./../../data/Deck"
-import Button from "./../Button"
-import NormalText from "./../NormalText"
-import colors from "./../../styles/colors"
+import DeckModel from './../../data/Deck'
+import Button from './../Button'
+import NormalText from './../NormalText'
+import colors from './../../styles/colors'
 
 class Deck extends Component {
-  static displayName = "Deck"
+  static displayName = 'Deck'
 
   _review = () => {
     this.props.review()
@@ -36,8 +36,8 @@ class Deck extends Component {
 
 const styles = StyleSheet.create({
   deckGroup: {
-    flexDirection: "row",
-    alignItems: "stretch",
+    flexDirection: 'row',
+    alignItems: 'stretch',
     padding: 10,
     marginBottom: 5
   },
@@ -45,9 +45,9 @@ const styles = StyleSheet.create({
   editButton: {
     width: 60,
     backgroundColor: colors.pink2,
-    justifyContent: "center",
-    alignItems: "center",
-    alignSelf: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
     padding: 0,
     paddingTop: 10,
     paddingBottom: 10,

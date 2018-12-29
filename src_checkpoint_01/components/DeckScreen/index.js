@@ -1,16 +1,33 @@
-import React, { Component } from "react"
-import { View } from "react-native"
+import React, { Component } from 'react'
+import { View } from 'react-native'
 
-import { MockDecks } from "./../../data/Mocks"
-import Deck from "./Deck"
-import DeckCreation from "./DeckCreation"
+import { MockDecks } from './../../data/Mocks'
+import Deck from './Deck'
+import DeckCreation from './DeckCreation'
 
 class DecksScreen extends Component {
-  static displayName = "DeckScreen"
+  static displayName = 'DeckScreen'
+
+  static navigationOptions = 'DeckScreen'
 
   constructor(props) {
     super(props)
     this.state = { decks: MockDecks }
+  }
+
+  _createDeck = () => {
+    console.warn('Data Saving not implemented')
+    this.props.navigation.navigate('CardCreation')
+  }
+
+  _addCards = () => {
+    console.warn('Data saving not implemented')
+    this.props.navigation.navigate('Review')
+  }
+
+  _review = () => {
+    console.warn('Actual reviews not implemented')
+    this.props.navigation.navigate('Review')
   }
 
   _mkDeckViews() {
@@ -19,7 +36,15 @@ class DecksScreen extends Component {
     }
 
     return this.state.decks.map(deck => {
-      return <Deck deck={deck} count={deck.cards.length} key={deck.id} />
+      return (
+        <Deck
+          deck={deck}
+          count={deck.cards.length}
+          key={deck.id}
+          add={this._addCards}
+          review={this._review}
+        />
+      )
     })
   }
 
@@ -27,7 +52,7 @@ class DecksScreen extends Component {
     return (
       <View>
         {this._mkDeckViews()}
-        <DeckCreation />
+        <DeckCreation create={this._createDeck} />
       </View>
     )
   }
