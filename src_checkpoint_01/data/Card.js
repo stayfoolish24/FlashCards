@@ -1,4 +1,4 @@
-import md5 from "md5"
+import md5 from 'md5'
 
 class Card {
   constructor(front, back, deckID) {
@@ -9,9 +9,10 @@ class Card {
   }
 
   setFromObject(ob) {
-    let c = new Card(ob.front, ob.back, ob.deckID)
-    c.setFromObject(ob)
-    return C
+    this.front = ob.front
+    this.back = ob.back
+    this.deckID = ob.deckID
+    this.id = ob.id
   }
   static fromObject(ob) {
     let c = new Card(ob.front, ob.back, ob.deckID)

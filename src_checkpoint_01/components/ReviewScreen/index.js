@@ -1,23 +1,22 @@
 import React, { Component } from 'react'
 import { StyleSheet, View } from 'react-native'
 
+import { connect } from 'react-redux'
 import ViewCard from './ViewCard'
-import { MockReviews } from './../../data/Mocks'
 import { mkReviewSummary } from './ReviewSummary'
 import colors from './../../styles/colors'
+import { reviewCard, nextReview, stopReview } from './../../actions/creators'
 
 class ReviewScreen extends Component {
   static displayName = 'ReviewScreen'
 
-  static navigationOptions = { title: 'ReView' }
+  static navigationOptions = { title: 'Review' }
 
   constructor(props) {
     super(props)
     this.state = {
       numReviewed: 0,
-      numCorrect: 0,
-      currentReview: 0,
-      reviews: MockReviews
+      numCorrect: 0
     }
   }
 
@@ -29,27 +28,26 @@ class ReviewScreen extends Component {
   }
 
   _nextReview = () => {
-    console.warn('Showing next review, but data saving not implemented.')
-    this.setState({ currentReview: this.state.currentReview + 1 })
+    this.props.nextReview()
   }
 
   _quitReviewing = () => {
-    console.warn('Data saving not implemented')
+    this.props.stopReview()
     this.props.navigation.goBack()
   }
 
   _contents() {
-    if (!this.state.reviews || this.state.reviews.length === 0) {
+    if (!this.props.reviews || this.props.reviews.length === 0) {
       return null
     }
 
-    if (this.state.currentReview < this.state.reviews.length) {
+    if (this.props.currentReview < this.props.reviews.length) {
       return (
         <ViewCard
           onReview={this.onReview}
           continue={this._nextReview}
           quit={this._quitReviewing}
-          {...this.state.reviews[this.state.currentReview]}
+          {...this.props.reviews[this.props.currentReview]}
         />
       )
     } else {
@@ -67,4 +65,25 @@ const styles = StyleSheet.create({
   container: { backgroundColor: colors.blue, flex: 1, paddingTop: 24 }
 })
 
-export default ReviewScreen
+const mapDispatchToProps = dispatch => {
+  return {
+    nextReview: () => {
+      dispatch(nextReview())
+    },
+    stopReview: () => {
+      dispatch(stopReview())
+    }
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    reviews: state.currentReview.questions,
+    currentReview: state.currentReview.currentQuestionIndex
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ReviewScreen)

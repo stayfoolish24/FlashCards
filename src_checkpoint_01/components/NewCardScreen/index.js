@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { StyleSheet, View } from 'react-native'
 
 import DeckModel from './../../data/Deck'
+import { addCard } from './../../actions/creators'
+import { connect } from 'react-redux'
 
 import Button from '../Button'
 import LabeledInput from '../LabeledInput'
@@ -18,6 +20,10 @@ class NewCard extends Component {
     this.state = this.initialState
   }
 
+  _deckID = () => {
+    return this.props.navigation.state.params.deckID
+  }
+
   _handleFront = text => {
     this.setState({ front: text })
   }
@@ -27,8 +33,8 @@ class NewCard extends Component {
   }
 
   _createCard = () => {
-    console.warn('Data saving not implemented')
-    this.props.navigation.navigate('CardCreation')
+    this.props.createCard(this.state.front, this.state.back, this._deckID())
+    this.props.navigation.navigate('CardCreation', { deckID: this._deckID() })
   }
 
   _reviewDeck = () => {
@@ -79,4 +85,19 @@ const styles = StyleSheet.create({
   buttonRow: { flexDirection: 'row' }
 })
 
-export default NewCard
+const mapStateToProps = state => {
+  return { decks: state.decks }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    createCard: (front, back, deckID) => {
+      dispatch(addCard(front, back, deckID))
+    }
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NewCard)
